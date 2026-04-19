@@ -2,9 +2,8 @@ export const ENV = {
     SB_URL: import.meta.env.VITE_SUPABASE_URL as string,
     SB_API_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY as string,
 
-    API_BASE_URL: "http://localhost:8080/api",
-    API_BOOKS_URL: import.meta.env.VITE_API_BOOKS_URL as string,
-
+    API_BASE_URL: (import.meta.env.VITE_API_BASE_URL as string) || "http://localhost:8080/api",
+    
     BOOKS_PAGE_SIZE: 10,
     BOOKS_SEARCH_DEBOUNCE: 300,
     CART_STORAGE_KEY: "app_cart_state",
