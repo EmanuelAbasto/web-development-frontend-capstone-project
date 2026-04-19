@@ -5,7 +5,7 @@ import { CartItem } from '../../components/CartItem/CartItem';
 import { ReservationForm } from '../../components/ReservationForm/ReservationForm';
 
 const CartPage: React.FC = () => {
-  const { state, removeItem, checkout } = useCart();
+  const { state, removeItem, incrementQuantity, decrementQuantity, checkout } = useCart();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -43,7 +43,10 @@ const CartPage: React.FC = () => {
           <CartItem 
             key={book.id} 
             item={book} 
-            onRemove={removeItem} 
+            onRemove={removeItem}
+            onIncrement={incrementQuantity}
+            onDecrement={decrementQuantity}
+            showQuantityControls={true}
           />
         ))}
       </section>

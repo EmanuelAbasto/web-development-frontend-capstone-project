@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { ShoppingCart, LogOut, User } from 'lucide-react';
+import { ShoppingCart, LogOut, User, Menu, X } from 'lucide-react';
 import styles from './Header.module.scss';
 import { useAuth } from '../../hooks/useAuth';
 import { useCart } from '../../hooks/useCart';
@@ -8,14 +8,23 @@ import { useCart } from '../../hooks/useCart';
 export const Header: React.FC = () => {
   const { isAuthenticated, logout, user } = useAuth();
   const { state: cartState } = useCart();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const linkClass = ({ isActive }: { isActive: boolean }): string =>
     isActive ? `${styles.link} ${styles.active}` : styles.link;
 
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className={styles.header}>
       <div className={`${styles.nav} container`}>
-        <Link to="/" className={styles.logoContainer}>
+        <Link to="/" className={styles.logoContainer} onClick={closeMenu}>
           <div className={styles.iconBox}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
@@ -25,19 +34,19 @@ export const Header: React.FC = () => {
           <span className={styles.logoText}>Library</span>
         </Link>
 
-        <ul className={styles.links}>
+        <ul className={`${styles.links} ${isMenuOpen ? styles.linksOpen : ''}`}>
           <li>
-            <NavLink to="/" className={linkClass} end>
+            <NavLink to="/" className={linkClass} end onClick={closeMenu}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/explore" className={linkClass}>
+            <NavLink to="/explore" className={linkClass} onClick={closeMenu}>
               Explore
             </NavLink>
           </li>
           <li>
-            <NavLink to="/my-books" className={linkClass}>
+            <NavLink to="/profile/reservations" className={linkClass} onClick={closeMenu}>
               My Books
             </NavLink>
           </li>
@@ -57,22 +66,26 @@ export const Header: React.FC = () => {
                 <User size={24} />
               </Link>
 
-              <button onClick={logout} className={styles.btnLogin}>
+              <button onClick={() => { logout(); closeMenu(); }} className={styles.btnLogin}>
                 <LogOut size={20} />
-                Logout
+                <span>Logout</span>
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className={styles.btnLogin}>
-                Login
+              <Link to="/login" className={styles.btnLogin} onClick={closeMenu}>
+                <span>Login</span>
               </Link>
-              <Link to="/register" className={styles.btnSignUp}>
+              <Link to="/register" className={styles.btnSignUp} onClick={closeMenu}>
                 Sign Up
               </Link>
             </>
           )}
         </div>
+
+        <button className={styles.menuBtn} onClick={handleMenuClick} aria-label="Toggle menu">
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
     </header>
   );

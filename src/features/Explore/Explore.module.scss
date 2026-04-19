@@ -78,3 +78,43 @@
     color: #64748b;
     font-size: 1.1rem;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding: 2rem 0;
+
+    button {
+        padding: 0.75rem 1.5rem;
+        background-color: #161922;
+        border: 1px solid #2a2e3b;
+        color: #94a3b8;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+
+        &:hover:not(:disabled) {
+            background-color: #a855f7;
+            color: white;
+            border-color: #a855f7;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    span {
+        color: #94a3b8;
+        font-weight: 500;
+        padding: 0 0.5rem;
+    }
+}

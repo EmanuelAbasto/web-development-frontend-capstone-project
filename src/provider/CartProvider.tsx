@@ -29,7 +29,8 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 try {
                     const newState = JSON.parse(event.newValue);
                     dispatch({ type: 'SYNC_CART', payload: newState });
-                } catch {
+                } catch (err) {
+                    void err;
                 }
             }
         };
@@ -40,6 +41,8 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const addItem = (book: BookData) => dispatch({ type: 'ADD_ITEM', payload: book });
     const removeItem = (id: string) => dispatch({ type: 'REMOVE_ITEM', payload: id });
+    const incrementQuantity = (id: string) => dispatch({ type: 'INCREMENT_QUANTITY', payload: id });
+    const decrementQuantity = (id: string) => dispatch({ type: 'DECREMENT_QUANTITY', payload: id });
 
     const checkout = async (dueDate: string) => {
         if (!isAuthenticated) throw new Error("You must be logged in");
@@ -79,7 +82,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     return (
-        <CartContext.Provider value={{ state, addItem, removeItem, checkout }}>
+        <CartContext.Provider value={{ state, addItem, removeItem, incrementQuantity, decrementQuantity, checkout }}>
             {children}
         </CartContext.Provider>
     );

@@ -22,7 +22,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 try {
                     const parsedUser = JSON.parse(savedUser);
                     setUser(parsedUser);
-                } catch (error) {
+                } catch (err) {
+                    void err;
                 }
             }
             
@@ -32,62 +33,54 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }, []);
 
     const login = useCallback(async (email: string, password: string): Promise<void> => {
-        try {
-            const response = await fetch(ENV.AUTH_LOGIN_URL, {
-                method: 'POST',
-                headers: {
-                    'apikey': ENV.SB_API_KEY,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
+        const response = await fetch(ENV.AUTH_LOGIN_URL, {
+            method: 'POST',
+            headers: {
+                'apikey': ENV.SB_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
 
-            const data: SupabaseAuthResponse = await response.json();
+        const data: SupabaseAuthResponse = await response.json();
 
-            if (!response.ok) {
-                throw new Error(data.error_description || 'Error de login');
-            }
+        if (!response.ok) {
+            throw new Error(data.error_description || 'Error de login');
+        }
 
-            if (data.access_token) {
-                localStorage.setItem(ENV.SB_TOKEN_STORAGE_KEY, data.access_token);
-            }
-            
-            if (data.user) {
-                const userData: User = {
-                    id: data.user.id,
-                    email: data.user.email,
-                    fullName: data.user.user_metadata?.full_name || 'User'
-                };
-                localStorage.setItem(ENV.SB_USER_STORAGE_KEY, JSON.stringify(userData));
-                setUser(userData);
-            }
-        } catch (error: unknown) {
-            throw error;
+        if (data.access_token) {
+            localStorage.setItem(ENV.SB_TOKEN_STORAGE_KEY, data.access_token);
+        }
+        
+        if (data.user) {
+            const userData: User = {
+                id: data.user.id,
+                email: data.user.email,
+                fullName: data.user.user_metadata?.full_name || 'User'
+            };
+            localStorage.setItem(ENV.SB_USER_STORAGE_KEY, JSON.stringify(userData));
+            setUser(userData);
         }
     }, []);
 
     const register = useCallback(async (email: string, password: string, fullName: string): Promise<void> => {
-        try {
-            const response = await fetch(ENV.AUTH_REGISTER_URL, {
-                method: 'POST',
-                headers: {
-                    'apikey': ENV.SB_API_KEY,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email,
-                    password,
-                    data: { full_name: fullName }
-                })
-            });
+        const response = await fetch(ENV.AUTH_REGISTER_URL, {
+            method: 'POST',
+            headers: {
+                'apikey': ENV.SB_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password,
+                data: { full_name: fullName }
+            })
+        });
 
-            const data: SupabaseAuthResponse = await response.json();
+        const data: SupabaseAuthResponse = await response.json();
 
-            if (!response.ok) {
-                throw new Error(data.msg || data.message || 'Error de registro');
-            }
-        } catch (error: unknown) {
-            throw error;
+        if (!response.ok) {
+            throw new Error(data.msg || data.message || 'Error de registro');
         }
     }, []);
 

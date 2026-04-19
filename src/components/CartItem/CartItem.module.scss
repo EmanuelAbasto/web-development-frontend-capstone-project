@@ -39,6 +39,51 @@
             margin: 0;
             font-size: 0.9rem;
         }
+
+        .quantityControls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+
+            .quantity {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 2rem;
+                height: 2rem;
+                border-radius: 0.25rem;
+                background: var(--accent-bg);
+                color: var(--accent);
+                font-weight: 600;
+                font-size: 0.9rem;
+            }
+
+            .quantityBtn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 2rem;
+                height: 2rem;
+                border: 1px solid var(--accent-border);
+                background: transparent;
+                color: var(--accent);
+                border-radius: 0.25rem;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover:not(:disabled) {
+                    background: var(--accent-bg);
+                    border-color: var(--accent);
+                    transform: scale(1.05);
+                }
+
+                &:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+            }
+        }
     }
 
     .removeBtn {

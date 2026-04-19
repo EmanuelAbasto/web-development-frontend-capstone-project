@@ -161,16 +161,27 @@
         }
     }
 
-    .navigationSection .tabsNavigation {
-        gap: 0.5rem;
+    .navigationSection {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
 
-        .navLink {
-            padding: 0.75rem 1rem;
-            font-size: 0.9rem;
+        .tabsNavigation {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            min-width: 100%;
 
-            svg {
-                width: 18px;
-                height: 18px;
+            .navLink {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+                flex: 1;
+                min-width: 140px;
+                text-align: center;
+
+                svg {
+                    width: 18px;
+                    height: 18px;
+                }
             }
         }
     }

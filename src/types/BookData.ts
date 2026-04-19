@@ -11,6 +11,7 @@ export interface BookData {
     status: {
         is_available: boolean;
         next_availability_date: string | null;
+        available_count?: number;
     };
     flags: {
         is_new: boolean;
@@ -20,4 +21,5 @@ export interface BookData {
     summary_short: string;
     published_at: string;
     summary: string;
+    quantity?: number;
 }

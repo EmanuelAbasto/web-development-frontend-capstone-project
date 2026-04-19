@@ -40,6 +40,11 @@ const BookDetail: React.FC<BookProps> = ({ data }) => {
             >
               {status.is_available ? 'Available' : 'Not Available'}
             </span>
+            {status.available_count !== undefined && (
+              <div className={styles.availableCount}>
+                {status.available_count} available
+              </div>
+            )}
           </div>
 
           <button className={styles.borrowButton} disabled={!status.is_available} type="button" onClick={handleBorrow}>
