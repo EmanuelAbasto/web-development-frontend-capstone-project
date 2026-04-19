@@ -1,0 +1,63 @@
+@use '../../styles/variables' as *;
+
+.itemCard {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    background: var(--bg);
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+    margin-bottom: 1rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+        border-color: var(--accent-border);
+        transform: translateY(-2px);
+    }
+
+    .thumbnail {
+        width: 70px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .info {
+        flex: 1;
+
+        h4 {
+            color: var(--text-h);
+            margin: 0 0 0.25rem 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        p {
+            color: var(--text);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+    }
+
+    .removeBtn {
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 0.75rem;
+        padding: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background: #fee2e2;
+            border-color: #fecaca;
+            color: #dc2626;
+            transform: scale(1.1);
+        }
+    }
+}

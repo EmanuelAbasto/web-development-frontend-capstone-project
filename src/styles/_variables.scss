@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+$purple-primary: #aa3bff;
+$purple-light: rgba(170, 59, 255, 0.1);
+$purple-border: rgba(170, 59, 255, 0.4);
+
+:root {
+  --bg: #ffffff;
+  --bg-secondary: #f8f9fa; // Fondo más limpio
+  --text: #4b5563;
+  --text-h: #111827;
+  --border: #e5e7eb;
+  
+  --accent: #{$purple-primary};
+  --accent-bg: #{$purple-light};
+  --accent-border: #{$purple-border};
+  
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115;
+    --bg-secondary: #161920;
+    --text: #9ca3af;
+    --text-h: #f9fafb;
+    --border: #262a33;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.1);
+    --accent-border: rgba(192, 132, 252, 0.3);
+  }
+}

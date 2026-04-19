@@ -1,0 +1,80 @@
+.explorePage {
+    background-color: #0f1117; // Fondo oscuro profundo
+    min-height: 100vh;
+    color: white;
+}
+
+.stickyHeader {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #0f1117;
+    padding: 2rem 0 1rem;
+    border-bottom: 1px solid #1f222c;
+}
+
+.searchWrapper {
+    margin-bottom: 1.5rem;
+    input {
+        width: 100%;
+        background-color: #161922;
+        border: 1px solid #2a2e3b;
+        border-radius: 8px;
+        padding: 12px 20px;
+        color: white;
+        font-size: 0.95rem;
+        transition: border-color 0.2s;
+
+        &:focus {
+            outline: none;
+            border-color: #a855f7; // Morado de tu logo
+        }
+    }
+}
+
+.categoryNav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+
+    button {
+        background-color: #161922;
+        border: 1px solid #2a2e3b;
+        color: #94a3b8;
+        padding: 6px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        white-space: nowrap;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+
+        &.active {
+            background-color: #a855f7;
+            color: white;
+            border-color: #a855f7;
+        }
+
+        &:hover:not(.active) {
+            background-color: #1f222c;
+            color: white;
+        }
+    }
+}
+
+.results {
+    padding-top: 2rem;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 1fr; // En Explore solemos usar lista horizontal
+    gap: 1.5rem;
+}
+
+.noResults {
+    text-align: center;
+    padding: 4rem;
+    color: #64748b;
+    font-size: 1.1rem;
+}
